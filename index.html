@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/css" type="text/css">
+    <title>MacOutlet</title>
+
+</head>
+
+<body>
+
+
+    <header class="header_holder">
+        <div class="container">
+            <div class="wrapper">
+                <div class="header_top">
+                    <div class="logo"><img src="/image/images/logo.png" alt="#"></div>
+                    <p class="link iccart"></p>
+                    <div class="corz"><img src="/image/images/Cart.png" alt="#"></div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="header_bottom">
+
+                <p> AirPods Pro</p>
+                <button type="button">Add to card</button>
+            </div>
+        </div>
+
+    </header>
+    <div class="container">
+        <input class="search" type="search" role="combobox" placeholder="Enter devise name...">
+        <div class="container-card">
+
+
+            <div class="sidenav">
+                <button class="dropdown-btn">Price
+                    <i class="fa fa-caret-down"></i>
+                </button>
+
+                <div class="dropdown-container">
+                    <div class="wrapper">
+                        <div>from</div> <input class="price" type="number"></br>
+                        <div>to</div><input class="price" type="number"></br>
+                    </div>
+                </div>
+                <button id='btnCol'class="dropdown-btn">Color
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-container">
+                    <div class="wrapper-colore">
+                        <div class="colum-colore">
+                            <ul class="chose-colore">
+                                <li class="chose-colore-item" role="button">
+                                    <input  id="red" onclick="funcCol(this)" class='colorInput' type="checkbox" value="Color" name="Red"> Red
+                                    <label for="chose-colore-item"></label>
+                                </li>
+                                <li class="chose-colore-item" role="button">
+                                    <input onclick="funcCol(this)" class='colorInput' type="checkbox" value='Color' name="Black"> Black
+                                    <label for="chose-colore-item"></label>
+                                </li>
+                                <li class="chose-colore-item" role="button">
+                                    <input onclick="funcCol(this)" class='colorInput' type="checkbox" value="Color" name="Blue"> Blue
+                                    <label for="chose-colore-item"></label>
+                                </li>
+                                <li class="chose-colore-item" role="button">
+                                    <input onclick="funcCol(this)" class='colorInput' type="checkbox" value="Color" name="Gold"> Gold
+                                    <label for="chose-colore-item"></label>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="colum-colore">
+                            <ul class="chose-colore">
+                                <li class="chose-colore-item" role="button">
+                                    <input onclick="funcCol(this)" class='colorInput' type="checkbox" value="Green" name="Green"> Green
+                                    <label for="chose-colore-item"></label>
+                                </li>
+                                <li class="chose-colore-item" role="button">
+                                    <input onclick="funcCol(this)" class='colorInput' type="checkbox" value="White" name="White"> White
+                                    <label for="chose-colore-item"></label>
+                                </li>
+                                <li class="chose-colore-item" role="button">
+                                    <input onclick="funcCol(this)" class='colorInput' type="checkbox" value="Grey" name="Grey"> Grey
+                                    <label for="chose-colore-item"></label>
+                                </li>
+                                <li class="chose-colore-item" role="button">
+                                    <input onclick="funcCol(this)" class='colorInput' type="checkbox" value="Yellow" name="Yellow"> Yellow
+                                    <label for="chose-colore-item"></label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <button class="dropdown-btn">Memory
+                    
+                </button>
+                <div class="dropdown-container">
+                    <div class="wrapper-colore">
+                        <div class="colum-colore">
+                            <ul class="chose-colore">
+                                <li class="chose-colore-item" role="button">
+                                    <input onclick="funcMemory(this)" type="checkbox" value="32" name="32"> 32Gb
+                                    <label for="chose-colore-item"></label>
+                                </li>
+                                <li class="chose-colore-item" role="button">
+                                    <input onclick="funcMemory(this)" type="checkbox" value="64" name="64"> 64Gb
+                                    <label for="chose-colore-item"></label>
+                                </li>
+                                <li class="chose-colore-item" role="button">
+                                    <input onclick="funcMemory(this)" type="checkbox" value="128" name="128"> 128Gb
+                                    <label for="chose-colore-item"></label>
+                                </li>
+                                <li class="chose-colore-item" role="button">
+                                    <input onclick="funcMemory(this)" type="checkbox" value="256" name="256"> 256Gb
+                                    <label for="chose-colore-item"></label>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="colum-colore">
+                            <ul class="chose-colore">
+                                <li class="chose-colore-item" role="button">
+                                    <input  onclick="funcMemory(this)" type="checkbox" value="512" name="512"> 512Gb
+                                    <label for="chose-colore-item"></label>
+                                </li>
+                                <li class="chose-colore-item" role="button">
+                                    <input  onclick="funcMemory(this)" type="checkbox" value="1" name="1"> 1Tb
+                                    <label for="chose-colore-item"></label>
+                                </li>
+                                <li class="chose-colore-item" role="button">
+                                    <input  onclick="funcMemory(this)" type="checkbox" value="2" name="2"> 2Tb
+                                    <label for="chose-colore-item"></label>
+                                </li>
+                                <li class="chose-colore-item" role="button">
+                                    <input  onclick="funcMemory(this)" type="checkbox" value="4" name="4"> 4Tb
+                                    <label for="chose-colore-item"></label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <button class="dropdown-btn" >Os
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-container">
+                    <div class="wrapper-colore">
+
+                        <div class="colum-colore">
+                            <ul class="chose-colore">
+                                <li class="chose-colore-item" role="button">
+                                    <input type="checkbox" onclick="funcOs(this)" name="IOS"> IOS
+                                    <label for="chose-colore-item"></label>
+                                </li>
+                                <li class="chose-colore-item" role="button">
+                                    <input type="checkbox" onclick="funcOs(this)" name="macOS"> Mac OS
+                                    <label for="chose-colore-item"></label>
+                                </li>
+                                <li class="chose-colore-item" role="button">
+                                    <input type="checkbox" onclick="funcOs(this)" name="tvOS"> tv OS
+                                    <label for="chose-colore-item"></label>
+                                </li>
+                                <li class="chose-colore-item" role="button">
+                                    <input type="checkbox" onclick="funcOs(this)" name="WatchOS"> Watch OS
+                                    <label for="chose-colore-item"></label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                <button class="dropdown-btn">Display
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-container">
+                    <div class="wrapper-colore">
+                        <div class="colum-colore">
+                            <ul class="chose-colore">
+                                <li class="chose-colore-item" role="button">
+                                    <input type="checkbox" onclick="funcDisplay(this)" name="2,5"> 2 - 5 inch
+                                    <label for="chose-colore-item"></label>
+                                </li>
+                                <li class="chose-colore-item" role="button">
+                                    <input type="checkbox" onclick="funcDisplay(this)" name="5,7"> 5 - 7 inch
+                                    <label for="chose-colore-item"></label>
+                                </li>
+                                <li class="chose-colore-item" role="button">
+                                    <input type="checkbox" onclick="funcDisplay(this)" name="7,1"> 7 - 12 inch
+                                    <label for="chose-colore-item"></label>
+                                </li>
+                                <li class="chose-colore-item" role="button">
+                                    <input type="checkbox" onclick="funcDisplay(this)" name="12,16"> 12- 16 inch
+                                    <label for="chose-colore-item"></label>
+                                </li>
+                                <li class="chose-colore-item" role="button">
+                                    <input type="checkbox" onclick="funcDisplay(this)" name="16,32"> +16 inch
+                                    <label for="chose-colore-item"></label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <script>var dropdown = document.getElementsByClassName("dropdown-btn");
+                        var i;
+
+                        for (i = 0; i < dropdown.length; i++) {
+                            dropdown[i].addEventListener("click", function () {
+                                this.classList.toggle("active");
+                                var dropdownContent = this.nextElementSibling;
+                                if (dropdownContent.style.display === "block") {
+                                    dropdownContent.style.display = "none";
+                                } else {
+                                    dropdownContent.style.display = "block";
+                                }
+                            });
+                        }</script>
+                </div>
+            </div>
+            <div id="card" class="card">
+
+            </div>
+            <script src="js/items.js"></script>
+        </div>
+        
+</body>
+
+</html>
