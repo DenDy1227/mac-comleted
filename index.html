@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,8 +6,8 @@
     <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/css" type="text/css">
+    
+    <link rel="stylesheet" href="css/style.css" type="text/css">
     <title>MacOutlet</title>
 
 </head>
@@ -15,13 +15,19 @@
 <body>
 
 
-    <header class="header_holder">
+    <header  class="header_holder">
+        <div id="header" class="hidden">
+            <div id="modal" class="hidden">
+                
+
+            </div>
+        </div>
         <div class="container">
             <div class="wrapper">
                 <div class="header_top">
-                    <div class="logo"><img src="/image/images/logo.png" alt="#"></div>
-                    <p class="link iccart"></p>
-                    <div class="corz"><img src="/image/images/Cart.png" alt="#"></div>
+                    <div class="logo"><img src="image/images/logo.png" alt="#"></div>
+                    
+                    <div class="corz"><img name="carOpen" onclick="cartShow(this)" src="image/images/Cart.jpg" alt="#"></div>
                 </div>
             </div>
         </div>

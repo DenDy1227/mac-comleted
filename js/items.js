@@ -1291,11 +1291,11 @@ function renderProducts(products) {
     for (let dev in products) {
 
         out += ` <li class= 'card-item'>
-                <img class='card-img' src="/image/${products[dev].imgUrl}" alt="#"'</br>
+                <img class='card-img' src="image/${products[dev].imgUrl}" alt="#"'</br>
                 <span class='card-device-name'>${products[dev].name}</span></br>
                 <span class='card-title'>${products[dev].orderInfo.inStock} left in stock</span></br>
                 <span class='card-title'>Price ${products[dev].price} $</span></br>
-                <button id='cartBtn' type='button' class='card-button'>Add to card</button>
+                <button id='${products[dev].id}' type='submit' class='card-button' onclick='buttFunc(this)'>Add to card</button>
 
                 </li>
     `
@@ -1421,15 +1421,109 @@ console.log(colorArr.memoryArr,colorArr,arrFiltred);
 if (!arrFiltred.length){
     renderProducts(items)
 }
-let objCart = {}
-let cartProd = document.getElementsByClassName('card-item');
-console.log(cartProd);
-for (let i = 0; i < 4; i++){
-    
-    objCart['i'] = cartProd[i] 
-    console.log(objCart);
-}
 
+let objCart =[]
+function buttFunc(subjct){
+    // let buttColection = document.getElementsByClassName('card-button')
+    // let butFocus = buttColection.item(`${subjct.id}`)
+    
+    let arrCart = [];
+    for (let i =0;i< items.length; i++){
+       if( items[i].id == subjct.id){
+           
+           arrCart.push(items[i].id)
+           arrCart.push(items[i].imgUrl); 
+           arrCart.push(items[i].name); 
+           arrCart.push(items[i].price); 
+           objCart.push(arrCart);
+           
+       }
+       
+       
+    }
+    console.log(objCart,arrCart)
+     window.localStorage.setItem('carts',JSON.stringify(objCart))
+
+    
+}
+let strStorage = JSON.parse(window.localStorage.getItem('carts'))
+ 
+function cartRender(targe){ 
+    document.getElementById('header').classList.toggle('wrapper-modal')
+    document.getElementById('header').classList.toggle('hidden')
+    document.getElementById('modal').classList.add('overlow')
+    document.getElementById('modal').classList.toggle('hidden')
+    let modal = `<span class="modal-close" onclick="closeModal()">&times; </span></br>
+    <p class="cart-title">Choosen items</p>
+    `
+    let arrNoRepeat = [];
+    let cost = 0 ;
+   let a = function(num){
+       let result = arrNoRepeat.filter((value) => value == num).length;
+      return result 
+   }
+for (let carts of targe){
+    if(arrNoRepeat.includes(carts[0])){
+         arrNoRepeat.push(carts[0])
+         cost+=carts[3]
+         a(carts[0])  
+         
+         
+         console.log('firstfi',arrNoRepeat)
+         
+    }else{
+    console.log('second');
+    arrNoRepeat.push(carts[0])
+    cost+=carts[3]
+modal+= `<div clas"vmodal">
+<li class="modal-item">
+        <img class="modal-img" src="/image/${carts[1]}" alt="#">
+        <span>${carts[2]}"</span>
+        <span>${carts[3]}$"</span>
+        <button btnL${carts[0]} type="submit" onclick="minus(${carts[0]})" clas="left"><</button>
+        <span id="item${carts[0]}">${a(carts[0])}</span>
+        <button btnR${carts[0]} type="submit" onclick="plus(${carts[0]}) clas="left">></button>
+        
+        </li>"
+        </div>
+` 
+    }
+}
+console.log(arrNoRepeat);
+modal+= `<div class="total">
+            <span>Total </span>
+            <span id="cost">${cost}$<span>
+        </div>
+        <button class="buyButton">Buy</button>`
+
+document.getElementById('modal').innerHTML = modal
+           
+}
+function cartShow(cart){
+   
+cartRender(strStorage)
+    
+         
+}
+function closeModal(){
+    document.getElementById('header').classList.toggle('hidden')
+    document.getElementById('header').classList.toggle('wrapper-modal')
+    document.getElementById('modal').classList.toggle('owerlow')
+    document.getElementById('modal').classList.toggle('hidden')
+
+
+}
+ function minus(indexM) {
+    strStorage.splice(indexM,1) 
+    console.log(strStorage);
+    cartRender(strStorage)
+}
+function plus(indexP) {
+    strStorage.push(strStorage[0][indexP]);
+    console.log(strStorage);
+    cartRender(strStorage)
+    
+}
 
   
 
