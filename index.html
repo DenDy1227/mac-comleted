@@ -27,7 +27,7 @@
                 <div class="header_top">
                     <div class="logo"><img src="image/images/logo.png" alt="#"></div>
                     
-                    <div class="corz"><img name="carOpen" onclick="cartShow(this)" src="image/images/Cart.jpg" alt="#"></div>
+                    <div class="corz"><img name="carOpen" onclick="cartShow(this)" src="image/images/Cart.jpg" alt="#"><div id="counter" class="counter"></div></div>
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@
 
                 <div class="dropdown-container">
                     <div class="wrapper">
-                        <div>from</div> <input class="price" type="number"></br>
+                        <div>from</div> <input class="price" type="number" min="minPrice()"></br>
                         <div>to</div><input class="price" type="number"></br>
                     </div>
                 </div>

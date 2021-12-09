@@ -1271,11 +1271,6 @@ const items = [
         }
     },
 ];
-addEventListener('keyup', (el) => {
-    console.log(el, items.filter((dev) => dev.color == el.target.defaultValue))
-
-})
-
 let colorArr = {
     color:[],
     memoryArr:[],
@@ -1287,18 +1282,15 @@ let arrFiltred = []
 
 function renderProducts(products) {
     let out = "<ul class = 'card-list'><ul>"
-///${products[dev].color[0]}
     for (let dev in products) {
-
-        out += ` <li class= 'card-item'>
-                <img class='card-img' src="image/${products[dev].imgUrl}" alt="#"'</br>
-                <span class='card-device-name'>${products[dev].name}</span></br>
-                <span class='card-title'>${products[dev].orderInfo.inStock} left in stock</span></br>
-                <span class='card-title'>Price ${products[dev].price} $</span></br>
-                <button id='${products[dev].id}' type='submit' class='card-button' onclick='buttFunc(this)'>Add to card</button>
-
+        out += `<li class= 'card-item'>
+                    <img class='card-img' src="image/${products[dev].imgUrl}" alt="#"'</br>
+                    <span class='card-device-name'>${products[dev].name}</span></br>
+                    <span class='card-title'>${products[dev].orderInfo.inStock} left in stock</span></br>
+                    <span class='card-title'>Price ${products[dev].price} $</span></br>
+                    <button id='${products[dev].id}' type='submit' class='card-button' onclick='addToCart(this)'>Add to card</button>
                 </li>
-    `
+                `
     }
     document.getElementById('card').innerHTML = out;
 }
@@ -1308,23 +1300,17 @@ function funcCol(elem) {
     
     if (elem.checked == true) {
         colorArr.color.push(elem.name)
-
-    }
-    else {
+    } else {
         colorArr.color.splice(elem.name, 1);
         renderProducts(arrFiltred);
     }
-
-    if (' ') {
-        arrFiltred = items.filter((ele) => {
-            for (let col of colorArr.color) {
-                return ele.color.includes(col);
-               
-            }
-        })
-        renderProducts(arrFiltred);
-        console.log(arrFiltred, colorArr.color);
-    }
+    arrFiltred = items.filter((item) => {
+        for (let col of colorArr.color) {
+            return item.color.includes(col);
+        }
+    })
+    renderProducts(arrFiltred);
+    console.log(arrFiltred, colorArr.color);
 
 }
 function funcMemory(elem) {
@@ -1338,34 +1324,29 @@ function funcMemory(elem) {
         renderProducts(arrFiltred);
     }
 
-    if (' ') {
-        arrFiltred = items.filter((storage) => {
-            for (let memory of colorArr.memoryArr) {
-                 if(storage.storage == memory){
-                    console.log(storage); 
-                    return storage;
-                     
-                 }
-               
-            }
-        })
-        
-    }
+    arrFiltred = items.filter((storage) => {
+        for (let memory of colorArr.memoryArr) {
+             if(storage.storage == memory){
+                console.log(storage); 
+                return storage;
+                 
+             }
+           
+        }
+    })
     renderProducts(arrFiltred);
         console.log(arrFiltred, colorArr.memoryArr);
 
 }
 
 function funcOs(osType){
-    if (colorArr.OSarr.indexOf(osType.name)<0) {
+    if (colorArr.OSarr.indexOf(osType.name) < 0) {
         colorArr.OSarr.push(osType.name)
 
     }
-    else if(colorArr.OSarr.indexOf(osType.name)>-1 ) {
+    else if(colorArr.OSarr.indexOf(osType.name) > -1 ) {
         colorArr.OSarr.splice(colorArr.OSarr.indexOf(osType.name), 1);
-
         renderProducts(arrFiltred);
-        
     }
 
     if (' ') {
@@ -1386,9 +1367,8 @@ function funcOs(osType){
 }
 
 function funcDisplay(display){
-    if (colorArr.displayArr.indexOf(display.name)<0) {
-        colorArr.displayArr.push(display.name)
-
+    if (colorArr.displayArr.indexOf(display.name) < 0) {
+        colorArr.displayArr.push(display.name);
     }
     else if(colorArr.displayArr.indexOf(display.name)>-1 ) {
         colorArr.displayArr.splice(colorArr.displayArr.indexOf(display.name), 1)
@@ -1422,77 +1402,70 @@ if (!arrFiltred.length){
     renderProducts(items)
 }
 
-let objCart =[]
-function buttFunc(subjct){
-    // let buttColection = document.getElementsByClassName('card-button')
-    // let butFocus = buttColection.item(`${subjct.id}`)
-    
-    let arrCart = [];
-    for (let i =0;i< items.length; i++){
-       if( items[i].id == subjct.id){
+let objCart = []
+function addToCart(subjct){
+   
+    items.forEach(item => { 
+        
+       if (item.id === +subjct.id) {
            
-           arrCart.push(items[i].id)
-           arrCart.push(items[i].imgUrl); 
-           arrCart.push(items[i].name); 
-           arrCart.push(items[i].price); 
-           objCart.push(arrCart);
            
+         if (objCart.find((cart) => cart.id === +subjct.id)){
+             let count = objCart.find((cart) => cart.id === +subjct.id).count
+             if(count === 4){
+                    console.log('money net',count);
+             }else
+            objCart.find((cart) => cart.id === +subjct.id).count+=1
+           
+            console.log('exist in',objCart);
+        }else{
+        console.log('Here', item.id,objCart);
+        objCart.push({
+                    id: item.id,
+                    imgUrl: item.imgUrl,
+                    name: item.name,
+                    price: item.price,
+                    count:1,
+                    
+                    
+                }) }
        }
-       
-       
-    }
-    console.log(objCart,arrCart)
-     window.localStorage.setItem('carts',JSON.stringify(objCart))
-
-    
+       window.localStorage.setItem('carts',JSON.stringify(objCart))
+       let couterOfItem = document.getElementById('counter')
+       couterOfItem.innerText = JSON.parse(window.localStorage.getItem('carts')).length; 
+             
 }
-let strStorage = JSON.parse(window.localStorage.getItem('carts'))
- 
+    );
+}
 function cartRender(targe){ 
-    document.getElementById('header').classList.toggle('wrapper-modal')
-    document.getElementById('header').classList.toggle('hidden')
-    document.getElementById('modal').classList.add('overlow')
-    document.getElementById('modal').classList.toggle('hidden')
+    
     let modal = `<span class="modal-close" onclick="closeModal()">&times; </span></br>
     <p class="cart-title">Choosen items</p>
     `
-    let arrNoRepeat = [];
-    let cost = 0 ;
-   let a = function(num){
-       let result = arrNoRepeat.filter((value) => value == num).length;
-      return result 
-   }
+let total = 0;
 for (let carts of targe){
-    if(arrNoRepeat.includes(carts[0])){
-         arrNoRepeat.push(carts[0])
-         cost+=carts[3]
-         a(carts[0])  
-         
-         
-         console.log('firstfi',arrNoRepeat)
-         
-    }else{
-    console.log('second');
-    arrNoRepeat.push(carts[0])
-    cost+=carts[3]
+    
+    total += +carts.price * +carts.count 
+    
 modal+= `<div clas"vmodal">
-<li class="modal-item">
-        <img class="modal-img" src="/image/${carts[1]}" alt="#">
-        <span>${carts[2]}"</span>
-        <span>${carts[3]}$"</span>
-        <button btnL${carts[0]} type="submit" onclick="minus(${carts[0]})" clas="left"><</button>
-        <span id="item${carts[0]}">${a(carts[0])}</span>
-        <button btnR${carts[0]} type="submit" onclick="plus(${carts[0]}) clas="left">></button>
-        
-        </li>"
+            <li class="modal-item">
+                <img class="modal-img" src="/image/${carts.imgUrl}" alt="#">
+                <span>${carts.name}</span>
+                <span>${carts.price}$</span>
+                <button  type="submit" onclick="minus(${carts.id})" class="left"><</button>
+                <span id="item${carts.id}">${carts.count}</span>
+                <button type="submit" onclick="plus(${carts.id})" class="left">></button>
+                <button type="submit" onclick="deleteItem(${carts.id})" class="delete">X</button>
+
+            </li>"
         </div>
 ` 
     }
-}
-console.log(arrNoRepeat);
+
+
 modal+= `<div class="total">
             <span>Total </span>
-            <span id="cost">${cost}$<span>
+            <span id="cost">${total}$<span>
         </div>
         <button class="buyButton">Buy</button>`
 
@@ -1500,8 +1473,13 @@ document.getElementById('modal').innerHTML = modal
            
 }
 function cartShow(cart){
-   
+    document.getElementById('header').classList.toggle('wrapper-modal')
+    document.getElementById('header').classList.toggle('hidden')
+    document.getElementById('modal').classList.add('overlow')
+    document.getElementById('modal').classList.toggle('hidden')
+    strStorage = JSON.parse(window.localStorage.getItem('carts'))
 cartRender(strStorage)
+console.log(strStorage);
     
          
 }
@@ -1514,20 +1492,30 @@ function closeModal(){
 
 }
  function minus(indexM) {
-    strStorage.splice(indexM,1) 
-    console.log(strStorage);
-    cartRender(strStorage)
-}
-function plus(indexP) {
-    strStorage.push(strStorage[0][indexP]);
-    console.log(strStorage);
-    cartRender(strStorage)
+    strStorage = JSON.parse(window.localStorage.getItem('carts'))
+       if(strStorage.find((minus) => minus.id === + indexM).count < 2){
+           console.log('minValue');
+       }else{
+    strStorage.find((minus) => minus.id === + indexM).count-- 
+      cartRender(strStorage)
+       }
+    window.localStorage.setItem('carts',JSON.stringify(strStorage))
+ }
     
+
+function plus(indexP) {
+    strStorage = JSON.parse(window.localStorage.getItem('carts'))
+        if(strStorage.find((plus) => plus.id === + indexP).count < 4){
+      strStorage.find((plus) => plus.id === + indexP).count+= 1 
+      cartRender(strStorage)
+        } else{
+            console.log('maxValue');
+        }
+    window.localStorage.setItem('carts',JSON.stringify(strStorage))
 }
-
-  
-
-
-
-
-
+function deleteItem(itemId){
+    strStorage = JSON.parse(window.localStorage.getItem('carts'))
+    strStorage.splice(strStorage.findIndex((plus) => plus.id === + itemId),1)
+    cartRender(strStorage)
+    window.localStorage.setItem('carts',JSON.stringify(strStorage))
+}
